@@ -8,4 +8,9 @@ public class Analyzer implements IAnalyzer {
     public static String LETTER_DIGIT_REGEX = LETTER_REGEX + "|" + DIGIT_REGEX;
     public static String CRLF_REGEX = "\r\n";
     public static String PORT_REGEX = "\\d{1,5}";
+    public static String CHARACTER_REGEX = "[\\x20-\\xFF]";
+    public static String CHARACTER_SPEC_REGEX = "[-./=+*$°()\\[\\]{}^]";
+    public static String CHARACTER_PASS_REGEX = LETTER_DIGIT_REGEX + "|" + CHARACTER_SPEC_REGEX;
+    public static String SP_REGEX = "\\x20";
+    public static String ID_REGEX = "\\w{5,10}";
 }
