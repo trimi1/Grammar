@@ -3,12 +3,12 @@ package be.helmo.reseau.analyzer;
 import be.helmo.reseau.interfaces.IBuilder;
 
 public class Builder implements IBuilder {
-    public final static String newmon = "NEWMON" <impourl>;
+    public final static String newmon = "NEWMON";
 
-    public final static String
+    public final static String new;
 
 
-    public void methode1(){
+    public String newmonCreation(String ){
 
     }
 }
