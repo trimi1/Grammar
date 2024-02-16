@@ -11,4 +11,9 @@ public class Analyzer implements IAnalyzer {
     public static String HOST_REGEX = "(?:(?:\\w{3,50}|\\.|-|)+)";
     public static String PATH_REGEX = "/[\\w./_-]{0,100}";
 
+    public static String CHARACTER_REGEX = "[\\x20-\\xFF]";
+    public static String CHARACTER_SPEC_REGEX = "[-./=+*$°()\\[\\]{}^]";
+    public static String CHARACTER_PASS_REGEX = LETTER_DIGIT_REGEX + "|" + CHARACTER_SPEC_REGEX;
+    public static String SP_REGEX = "\\x20";
+    public static String ID_REGEX = "\\w{5,10}";
 }
