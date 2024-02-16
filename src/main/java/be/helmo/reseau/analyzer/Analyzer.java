@@ -11,8 +11,6 @@ public class Analyzer implements IAnalyzer {
     public static String LETTER_DIGIT_REGEX = LETTER_REGEX + "|" + DIGIT_REGEX;
     public static String CRLF_REGEX = "\r\n";
     public static String PORT_REGEX = "\\d{1,5}";
-    public static String HOST_REGEX = "(?:(?:\\w{3,50}|\\.|-|)+)";
-    public static String PATH_REGEX = "/[\\w./_-]{0,100}";
     public static String CHARACTER_REGEX = "[\\x20-\\xFF]";
     public static String CHARACTER_SPEC_REGEX = "[-./=+*$°()\\[\\]{}^]";
     public static String CHARACTER_PASS_REGEX = LETTER_DIGIT_REGEX + "|" + CHARACTER_SPEC_REGEX;
@@ -23,6 +21,8 @@ public class Analyzer implements IAnalyzer {
     public static String PASSWORD_REGEX = "[\\x21-\\x7E]{3,50}";
     public static String AUTHENTICATION_REGEX = "[\\x21-\\x7E]{3,50}";
     public static String PASSWORD_AUTH_REGEX = PASSWORD_REGEX + "(#" + AUTHENTICATION_REGEX + ")?";
+    public static String HOST_REGEX = "(?:(?:\\w{3,50}|\\.|-|)+)";
+    public static String PATH_REGEX = "/[\\w./_-]{0,100}";
     public static String URL_REGEX = PROTOCOL_REGEX + "://(" + USERNAME_REGEX + "(:"
             + PASSWORD_AUTH_REGEX + "@)?" + HOST_REGEX + "(:"
             + PORT_REGEX + ")?" + PATH_REGEX + ")?";

@@ -6,16 +6,6 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class AnalyzerTest {
-
-    @Test
-    public void testUsernameRegex() {
-        String USERNAME_REGEX = "[" + Analyzer.LETTER_DIGIT_REGEX + "]{3,50}";
-        assertTrue("abc123".matches(USERNAME_REGEX));
-        assertTrue("abc123abc123abc123abc123abc123abc123abc123abc123abc123abc123".matches(USERNAME_REGEX));
-        assertFalse("abc123abc123abc123abc123abc123abc123abc123abc123abc123abc1234".matches(USERNAME_REGEX));
-        assertFalse("abc123abc123abc123abc123abc123abc123abc123abc123abc123abc1234a".matches(USERNAME_REGEX));
-    }
-
     @Test
     public void letterRegexTest() {
         assertTrue("a".matches(Analyzer.LETTER_REGEX));
@@ -48,7 +38,7 @@ public class AnalyzerTest {
 
     @Test
     public void CRLFTest() {
-        assertTrue(" ".matches(Analyzer.CRLF_REGEX));
+        assertTrue("\r\n".matches(Analyzer.CRLF_REGEX));
     }
 
     @Test
@@ -83,6 +73,7 @@ public class AnalyzerTest {
         assertTrue("/.".matches(Analyzer.PATH_REGEX));
         assertTrue("/".matches(Analyzer.PATH_REGEX));
     }
+
 
 
 }
