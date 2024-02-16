@@ -9,5 +9,6 @@ public class Main {
     // methode créé par leutrim
     public void testTrim() {
         System.out.println("testTrim");
+        System.out.println("testTrim");
     }
 }
