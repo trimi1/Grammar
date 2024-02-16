@@ -5,5 +5,10 @@ import be.helmo.reseau.interfaces.IBuilder;
 public class Builder implements IBuilder {
     public final static String newmon = "NEWMON" <impourl>;
 
-    public
+    public final static String
+
+
+    public void methode1(){
+
+    }
 }
