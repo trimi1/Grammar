@@ -9,6 +9,6 @@ public class Builder implements IBuilder {
 
 
     public void methode1(){
-
+        System.out.println("Test Matteo");
     }
 }
