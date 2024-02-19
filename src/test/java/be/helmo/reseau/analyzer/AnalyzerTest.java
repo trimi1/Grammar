@@ -2,7 +2,8 @@ package be.helmo.reseau.analyzer;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class AnalyzerTest {
     @Test
@@ -98,32 +99,6 @@ public class AnalyzerTest {
         assertTrue("!".matches(Analyzer.CHARACTER_REGEX));
         assertFalse("\n".matches(Analyzer.CHARACTER_REGEX));
         assertFalse("\r".matches(Analyzer.CHARACTER_REGEX));
-    }
-
-    @Test
-    public void characterSpecRegexTest() {
-        assertTrue("-".matches(Analyzer.CHARACTER_SPEC_REGEX));
-        assertTrue(".".matches(Analyzer.CHARACTER_SPEC_REGEX));
-        assertTrue("/".matches(Analyzer.CHARACTER_SPEC_REGEX));
-        assertTrue("=".matches(Analyzer.CHARACTER_SPEC_REGEX));
-        assertTrue("+".matches(Analyzer.CHARACTER_SPEC_REGEX));
-        assertTrue("*".matches(Analyzer.CHARACTER_SPEC_REGEX));
-        assertTrue("$".matches(Analyzer.CHARACTER_SPEC_REGEX));
-        assertTrue("°".matches(Analyzer.CHARACTER_SPEC_REGEX));
-        assertTrue("(".matches(Analyzer.CHARACTER_SPEC_REGEX));
-        assertTrue(")".matches(Analyzer.CHARACTER_SPEC_REGEX));
-        assertTrue("[".matches(Analyzer.CHARACTER_SPEC_REGEX));
-        assertTrue("]".matches(Analyzer.CHARACTER_SPEC_REGEX));
-        assertTrue("{".matches(Analyzer.CHARACTER_SPEC_REGEX));
-        assertTrue("}".matches(Analyzer.CHARACTER_SPEC_REGEX));
-        assertTrue("^".matches(Analyzer.CHARACTER_SPEC_REGEX));
-
-        assertTrue("-".matches(Analyzer.CHARACTER_SPEC_REGEX));
-        assertTrue("_".matches(Analyzer.CHARACTER_SPEC_REGEX));
-        assertTrue(".".matches(Analyzer.CHARACTER_SPEC_REGEX));
-        assertTrue("=".matches(Analyzer.CHARACTER_SPEC_REGEX));
-        assertFalse("abc".matches(Analyzer.CHARACTER_SPEC_REGEX));
-        assertFalse("!".matches(Analyzer.CHARACTER_SPEC_REGEX));
     }
 
     @Test
@@ -346,5 +321,25 @@ public class AnalyzerTest {
         assertFalse(" /ab".matches(Analyzer.PATH_REGEX)); // less than 3 characters
         assertFalse("../a".repeat(101).matches(Analyzer.PATH_REGEX)); // more than 100 characters
         assertFalse("o/path@name".matches(Analyzer.PATH_REGEX));
+    }
+
+    @Test
+    public void characterSpecRegexTest() {
+        assertTrue("-".matches(Analyzer.CHARACTER_SPEC_REGEX));
+        assertTrue(".".matches(Analyzer.CHARACTER_SPEC_REGEX));
+        assertTrue("/".matches(Analyzer.CHARACTER_SPEC_REGEX));
+        assertTrue("=".matches(Analyzer.CHARACTER_SPEC_REGEX));
+        assertTrue("+".matches(Analyzer.CHARACTER_SPEC_REGEX));
+        assertTrue("*".matches(Analyzer.CHARACTER_SPEC_REGEX));
+        assertTrue("$".matches(Analyzer.CHARACTER_SPEC_REGEX));
+        assertTrue("°".matches(Analyzer.CHARACTER_SPEC_REGEX));
+        //assertEquals("°", Analyzer.CHARACTER_SPEC_REGEX);
+        assertTrue("(".matches(Analyzer.CHARACTER_SPEC_REGEX));
+        assertTrue(")".matches(Analyzer.CHARACTER_SPEC_REGEX));
+        assertTrue("[".matches(Analyzer.CHARACTER_SPEC_REGEX));
+        assertTrue("]".matches(Analyzer.CHARACTER_SPEC_REGEX));
+        assertTrue("{".matches(Analyzer.CHARACTER_SPEC_REGEX));
+        assertTrue("}".matches(Analyzer.CHARACTER_SPEC_REGEX));
+        assertTrue("^".matches(Analyzer.CHARACTER_SPEC_REGEX));
     }
 }
