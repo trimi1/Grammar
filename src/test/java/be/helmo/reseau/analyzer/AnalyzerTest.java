@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class AnalyzerTest {
+    // Branch Leutrim
     @Test
     public void letterRegexTest() {
         assertTrue("a".matches(Analyzer.LETTER_REGEX));
