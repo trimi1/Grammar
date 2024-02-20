@@ -29,7 +29,7 @@ public class Analyzer implements IAnalyzer {
     public static String MIN_REGEX = "[" + DIGIT_REGEX + "]{1,8}";
     public static String MAX_REGEX = "[" + DIGIT_REGEX + "]{1,8}";
     public static String FREQUENCY_REGEX = "[" + DIGIT_REGEX + "]{1,8}";
-    public static String AUGMENTED_URL_REGEX = "[" + DIGIT_REGEX + "]{1,8}!" + URL_REGEX + "!" + MIN_REGEX + "!" + MAX_REGEX;
+    public static String AUGMENTED_URL_REGEX = ("[" + DIGIT_REGEX + "]{1,8}!") +( URL_REGEX + "!" )+( MIN_REGEX + "!") +( MAX_REGEX);
     public static String STATE_REGEX = "OK|ALARM|DOWN|UNKNOWN";
     public static String MESSAGE_REGEX = "[\\x21-\\x7E]{1,200}";
 
