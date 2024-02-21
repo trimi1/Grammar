@@ -77,5 +77,12 @@ public class Builder implements IBuilder {
  public String buildNewmonRespErr(String message){
         return this.replacePlaceholder(NEWMON_RESPERR,"message",message);
     }
+public String buildNewmonListmon(String message){
+        return LISTMON;
+    }
+public String buildMon(List<Integer> id){
+    return this.replacePlaceholder(MON,"id",id);
+
+    }
 
 }
