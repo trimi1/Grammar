@@ -2,6 +2,8 @@ package be.helmo.reseau.analyzer;
 
 import be.helmo.reseau.interfaces.IAnalyzer;
 
+import java.util.List;
+
 public class Analyzer implements IAnalyzer {
     /*
     Standard definitions
@@ -51,8 +53,23 @@ public class Analyzer implements IAnalyzer {
     public static String STATUS_REGEX = "STATUS" + SP_REGEX + ID_REGEX + SP_REGEX + STATE_REGEX + CRLF_REGEX;
     public static String MONITOR_PROTOCOL_REGEX = SETUP_REGEX + STATUSOF_REGEX + STATUS_REGEX;
 
-    public boolean analyze(String regex, String toAnalyze) {
-        return toAnalyze.matches(regex);
+    /*
+    Multicast
+     */
+    public static String PROBE_REGEX = "PROBE" + SP_REGEX + PROTOCOL_REGEX + SP_REGEX + PORT_REGEX + CRLF_REGEX;
+    public static String DATA_REGEX = "DATA" + SP_REGEX + PROTOCOL_REGEX + SP_REGEX + PORT_REGEX + CRLF_REGEX;
+
+    private final List<String> regexList = List.of(
+            LETTER_REGEX,
+            DIGIT_REGEX);
+
+    public int analyze(String toAnalyze) {
+        for (String r : regexList) {
+            if (r.matches(toAnalyze)) {
+                return regexList.indexOf(r);
+            }
+        }
+
+        return -1;
     }
-    //
 }
