@@ -54,4 +54,5 @@ public class Analyzer implements IAnalyzer {
     public boolean analyze(String regex, String toAnalyze) {
         return toAnalyze.matches(regex);
     }
+    //
 }
