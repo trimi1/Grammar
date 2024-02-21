@@ -61,7 +61,44 @@ public class Analyzer implements IAnalyzer {
 
     private final List<String> regexList = List.of(
             LETTER_REGEX,
-            DIGIT_REGEX);
+            DIGIT_REGEX,
+            LETTER_DIGIT_REGEX,
+            CRLF_REGEX,
+            PORT_REGEX,
+            CHARACTER_REGEX,
+            CHARACTER_SPEC_REGEX,
+            CHARACTER_PASS_REGEX,
+            SP_REGEX,
+            ID_REGEX,
+            PROTOCOL_REGEX,
+            USERNAME_REGEX,
+            PASSWORD_REGEX,
+            AUTHENTICATION_REGEX,
+            PASSWORD_AUTH_REGEX,
+            HOST_REGEX,
+            PATH_REGEX,
+            URL_REGEX,
+            MIN_REGEX,
+            MAX_REGEX,
+            FREQUENCY_REGEX,
+            AUGMENTED_URL_REGEX,
+            STATE_REGEX,
+            MESSAGE_REGEX,
+            NEWMON_REGEX,
+            NEWMON_RESP_REGEX,
+            LISTMON_REGEX,
+            MON_REGEX,
+            REQUEST_REGEX,
+            RESPOND_REGEX,
+            CLIENT_PROTOCOL_REGEX,
+            SETUP_REGEX,
+            STATUSOF_REGEX,
+            STATUS_REGEX,
+            MONITOR_PROTOCOL_REGEX,
+            PROBE_REGEX,
+            DATA_REGEX
+    );
+
 
     public int analyze(String toAnalyze) {
         for (String r : regexList) {
