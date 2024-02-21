@@ -12,7 +12,6 @@ public class Builder implements IBuilder {
     public final static String space = " ";
     public final static String newmon = "NEWMON <id> \\n";
 
-
     public String NewmonCreation(String augmentedUrl){
         newmon.replace("<id>", augmentedUrl);
     }
