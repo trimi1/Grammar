@@ -106,7 +106,6 @@ public class Analyzer implements IAnalyzer {
                 return regexList.indexOf(r);
             }
         }
-
         return -1;
     }
 }

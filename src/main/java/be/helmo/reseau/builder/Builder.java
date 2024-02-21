@@ -19,6 +19,19 @@ public class Builder implements IBuilder {
     public final static String DATA = "DATA <protocol> <port>\n\n";
 
     /*
+    For Client to Monitor
+     */
+    public final static String NEWMON = "NEWMON <augmented_url>\n\n";
+    public final static String NEWMON_RESPOK = "+OK <message>\n\n";
+    public final static String NEWMON_RESPERR = "-ERR <message>\n\n";
+    public final static String LISTMON = "LISTMON\n\n";
+    public final static String MON = "MON <id>\n\n";
+    public final static String REQUEST = "REQUEST <id>\n\n";
+    public final static String RESPOND = "RESPOND <id> <url> <state>\n\n";
+
+
+
+    /*
     Utils
      */
     private String replacePlaceholder(String template, String placeholder, String value) {
@@ -54,4 +67,15 @@ public class Builder implements IBuilder {
     public String buildData(String protocol, int port) {
         return this.replacePlaceholder(this.replacePlaceholder(DATA, "protocol", protocol), "port", String.valueOf(port));
     }
+
+    public String buildNewmon(String augmentedUrl){
+        return this.replacePlaceholder(NEWMON,"augmented_url",augmentedUrl);
+    }
+    public String buildNewmonRespOk(String message){
+        return this.replacePlaceholder(NEWMON_RESPOK,"message",message);
+    }
+ public String buildNewmonRespErr(String message){
+        return this.replacePlaceholder(NEWMON_RESPERR,"message",message);
+    }
+
 }
