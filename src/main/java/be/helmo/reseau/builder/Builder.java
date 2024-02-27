@@ -48,10 +48,10 @@ public class Builder implements IBuilder {
     From probe to monitor
      */
     public String buildProbe(String protocol, int port) {
-        return this.replacePlaceholder(this.replacePlaceholder(PROBE, "protocol", protocol), "port", String.valueOf(port));
+        return this.replacePlaceholder(this.replacePlaceholder(PROBE, "protocol ", protocol), "port", String.valueOf(port));
     }
 
     public String buildData(String protocol, int port) {
-        return this.replacePlaceholder(this.replacePlaceholder(DATA, "protocol", protocol), "port", String.valueOf(port));
+        return this.replacePlaceholder(this.replacePlaceholder(DATA, "protocol ", protocol), "port", String.valueOf(port));
     }
 }
