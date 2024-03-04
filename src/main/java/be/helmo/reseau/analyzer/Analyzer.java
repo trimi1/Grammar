@@ -109,4 +109,8 @@ public class Analyzer implements IAnalyzer {
 
         return -1;
     }
+    public String giveMessageConstruction(String toAnalyze) {
+        int pos = analyze(toAnalyze);
+        return regexList.get(pos);
+    }
 }
