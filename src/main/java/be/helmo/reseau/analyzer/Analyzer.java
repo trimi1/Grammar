@@ -49,9 +49,9 @@ public class Analyzer implements IAnalyzer {
     Protocol between monitor and server
      */
     public static String SETUP_REGEX = "SETUP" + SP_REGEX + FREQUENCY_REGEX + "((" + SP_REGEX + AUGMENTED_URL_REGEX + "){0,100})" + CRLF_REGEX;
-    public static String STATUSOF_REGEX = "STATUSOF" + SP_REGEX + ID_REGEX + CRLF_REGEX;
-    public static String STATUS_REGEX = "STATUS" + SP_REGEX + ID_REGEX + SP_REGEX + STATE_REGEX + CRLF_REGEX;
-    public static String MONITOR_PROTOCOL_REGEX = SETUP_REGEX + STATUSOF_REGEX + STATUS_REGEX;
+    public static String STATUSOF_REGEX = "STATUSOF" + SP_REGEX +"("+ ID_REGEX +")"+ CRLF_REGEX;
+    public static String STATUS_REGEX = "STATUS" + SP_REGEX +"("+ ID_REGEX +")"+ SP_REGEX + "("+STATE_REGEX + ")"+ CRLF_REGEX;
+    public static String MONITOR_PROTOCOL_REGEX = SETUP_REGEX  +STATUSOF_REGEX + STATUS_REGEX;
 
     /*
     Multicast
