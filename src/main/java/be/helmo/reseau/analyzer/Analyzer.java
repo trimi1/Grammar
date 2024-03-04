@@ -26,13 +26,11 @@ public class Analyzer implements IAnalyzer {
     public static String HOST_REGEX = "(" + LETTER_DIGIT_REGEX + "|" + "\\." + "|" + "_" + "|" + "-" + ")" + "{3,50}";
     public static String PATH_REGEX = "/(" + LETTER_DIGIT_REGEX + "|[.\\-_]){0,100}";
     public static String URL_REGEX = PROTOCOL_REGEX + "://(" + USERNAME_REGEX + "(:"
-            + PASSWORD_AUTH_REGEX + "@)?" + HOST_REGEX + "(:"
-            + PORT_REGEX + ")?" + PATH_REGEX + ")?";
-    public static String MIN_REGEX = "[" + DIGIT_REGEX + "]{1,8}";
-    public static String MAX_REGEX = "[" + DIGIT_REGEX + "]{1,8}";
-    public static String FREQUENCY_REGEX = "[" + DIGIT_REGEX + "]{1,8}";
-    public static String AUGMENTED_URL_REGEX = ("[" + DIGIT_REGEX + "]{1,8}!") +( URL_REGEX + "!" )+( MIN_REGEX + "!") +( MAX_REGEX);
-
+            + PASSWORD_AUTH_REGEX + ")?@)?" + HOST_REGEX + "(" + PORT_REGEX + ")?" + PATH_REGEX;
+    public static String MIN_REGEX = DIGIT_REGEX + "{1,8}";
+    public static String MAX_REGEX = DIGIT_REGEX + "{1,8}";
+    public static String FREQUENCY_REGEX = DIGIT_REGEX + "{1,8}";
+    public static String AUGMENTED_URL_REGEX = ID_REGEX + "!" + URL_REGEX + "!" + MIN_REGEX + "!" + MAX_REGEX;
     public static String STATE_REGEX = "OK|ALARM|DOWN|UNKNOWN";
     public static String MESSAGE_REGEX = CHARACTER_REGEX + "{1,200}";
 
@@ -110,5 +108,9 @@ public class Analyzer implements IAnalyzer {
         }
 
         return -1;
+    }
+    public String giveMessageConstruction(String toAnalyze) {
+        int pos = analyze(toAnalyze);
+        return regexList.get(pos);
     }
 }
