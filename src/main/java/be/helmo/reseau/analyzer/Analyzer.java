@@ -62,7 +62,10 @@ public class Analyzer implements IAnalyzer {
             NEWMON_REGEX, NEWMON_RESP_REGEX, LISTMON_REGEX, LISTMON_REGEX, MON_REGEX, REQUEST_REGEX, RESPOND_REGEX, SETUP_REGEX, STATUSOF_REGEX, STATUS_REGEX, PROBE_REGEX, DATA_REGEX
     );
 
-    public static Analyzer GetInstance() {
+    private Analyzer() {
+    }
+
+    public static Analyzer getInstance() {
         if (instance == null) {
             instance = new Analyzer();
         }
