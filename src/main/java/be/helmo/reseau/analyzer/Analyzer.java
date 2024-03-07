@@ -36,7 +36,7 @@ public class Analyzer implements IAnalyzer {
     public static String MESSAGE_REGEX = CHARACTER_REGEX + "{1,200}";
 
     /*
-    Protocol between client and monitor
+    Definition between client and monitor
      */
     public static String NEWMON_REGEX = "NEWMON" + SP_REGEX + AUGMENTED_URL_REGEX + CRLF_REGEX;
     public static String NEWMON_RESP_REGEX = "(\\+OK" + SP_REGEX + MESSAGE_REGEX + ")?|(-ERR" + SP_REGEX + MESSAGE_REGEX + ")?";
@@ -46,7 +46,7 @@ public class Analyzer implements IAnalyzer {
     public static String RESPOND_REGEX = "RESPOND" + SP_REGEX + ID_REGEX + SP_REGEX + URL_REGEX + SP_REGEX + STATE_REGEX + CRLF_REGEX;
 
     /*
-    Protocol between monitor and probe
+    Definition between monitor and probe
      */
     public static String SETUP_REGEX = "SETUP" + SP_REGEX +"(?<Frequency>" +FREQUENCY_REGEX +")(" + SP_REGEX +"(?<Aurls>" + AUGMENTED_URL_REGEX + ")){0,100}" + CRLF_REGEX;
     public static String STATUSOF_REGEX = "STATUSOF" + SP_REGEX + "(?<Id>" + ID_REGEX + ")" + CRLF_REGEX;
