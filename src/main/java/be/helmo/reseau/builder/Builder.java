@@ -38,8 +38,8 @@ public class Builder {
         return replacePlaceholder(replacePlaceholder(STATUS, "id", id), "state", state);
     }
 
-    public static String buildStatusOf(int id) {
-        return replacePlaceholder(STATUSOF, "id", String.valueOf(id));
+    public static String buildStatusOf(String id) {
+        return replacePlaceholder(STATUSOF, "id", id);
     }
 
     /*
