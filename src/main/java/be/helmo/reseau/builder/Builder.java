@@ -27,6 +27,10 @@ public class Builder {
     public final static String REQUEST = "REQUEST <id>\n\n";
     public final static String RESPOND = "RESPOND <id> <url> <state>\n\n";
 
+    /*
+    For Monitor to Client
+     */
+
 
 
     /*
