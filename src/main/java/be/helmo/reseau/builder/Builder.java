@@ -8,13 +8,13 @@ public class Builder {
      */
     public final static String SETUP = "SETUP <frequency>\n\n";
     public final static String STATUSOF = "STATUSOF <id>\n\n";
-    public final static String STATUS = "STATUS <id> <state>\n\n";
 
     /*
     For probe to monitor
      */
     public final static String PROBE = "PROBE <protocol> <port>\n\n";
     public final static String DATA = "DATA <protocol> <port>\n\n";
+    public final static String STATUS = "STATUS <id> <state>\n\n";
 
     /*
     Utils
