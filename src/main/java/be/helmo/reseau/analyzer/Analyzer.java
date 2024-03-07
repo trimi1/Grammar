@@ -3,6 +3,8 @@ package be.helmo.reseau.analyzer;
 import be.helmo.reseau.interfaces.IAnalyzer;
 
 import java.util.List;
+import java.util.regex.MatchResult;
+import java.util.regex.Matcher;
 
 public class Analyzer implements IAnalyzer {
     /*
