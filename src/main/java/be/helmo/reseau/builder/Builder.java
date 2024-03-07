@@ -51,10 +51,6 @@ public class Builder {
         return s.toString();
     }
 
-    public static String buildStatus(String id, String state) {
-        return replacePlaceholder(replacePlaceholder(STATUS, "id", id), "state", state);
-    }
-
     public static String buildStatusOf(String id) {
         return replacePlaceholder(STATUSOF, "id", id);
     }
@@ -70,22 +66,7 @@ public class Builder {
         return replacePlaceholder(replacePlaceholder(DATA, "protocol ", protocol), "port", String.valueOf(port));
     }
 
-    public String buildNewmon(String augmentedUrl){
-        return this.replacePlaceholder(NEWMON,"augmented_url",augmentedUrl);
+    public static String buildStatus(String id, String state) {
+        return replacePlaceholder(replacePlaceholder(STATUS, "id", id), "state", state);
     }
-    public String buildNewmonRespOk(String message){
-        return this.replacePlaceholder(NEWMON_RESPOK,"message",message);
-    }
- public String buildNewmonRespErr(String message){
-        return this.replacePlaceholder(NEWMON_RESPERR,"message",message);
-    }
-public String buildNewmonListmon(String message){
-        return LISTMON;
-    }
-public String buildMon(List<Integer> id){
-    return this.replacePlaceholder(MON,"id",id);
-
-
-    }
-
 }
