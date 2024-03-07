@@ -34,10 +34,6 @@ public class Builder {
         return s.toString();
     }
 
-    public static String buildStatus(String id, String state) {
-        return replacePlaceholder(replacePlaceholder(STATUS, "id", id), "state", state);
-    }
-
     public static String buildStatusOf(String id) {
         return replacePlaceholder(STATUSOF, "id", id);
     }
@@ -51,5 +47,9 @@ public class Builder {
 
     public static String buildData(String protocol, int port) {
         return replacePlaceholder(replacePlaceholder(DATA, "protocol ", protocol), "port", String.valueOf(port));
+    }
+
+    public static String buildStatus(String id, String state) {
+        return replacePlaceholder(replacePlaceholder(STATUS, "id", id), "state", state);
     }
 }
