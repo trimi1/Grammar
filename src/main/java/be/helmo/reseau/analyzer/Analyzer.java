@@ -24,14 +24,14 @@ public class Analyzer implements IAnalyzer {
     public static String PASSWORD_REGEX = CHARACTER_PASS_REGEX + "{3,50}";
     public static String AUTHENTICATION_REGEX = CHARACTER_PASS_REGEX + "{3,50}";
     public static String PASSWORD_AUTH_REGEX = "(?<Password>" + PASSWORD_REGEX + ")(#(?<Auth>" + AUTHENTICATION_REGEX + "))?";
-    public static String HOST_REGEX = "(" + LETTER_DIGIT_REGEX + "|\\.|_|-)"+"{3,50}";
-    public static String PATH_REGEX = "/(" + LETTER_DIGIT_REGEX + "|[.\\-_])"+"{0,100}";
+    public static String HOST_REGEX = "(" + LETTER_DIGIT_REGEX + "|\\.|_|-)" + "{3,50}";
+    public static String PATH_REGEX = "/(" + LETTER_DIGIT_REGEX + "|[.\\-_])" + "{0,100}";
     public static String URL_REGEX = "(?<Protocol>" + PROTOCOL_REGEX + ")://((?<Username>" + USERNAME_REGEX + ")(:("
             + PASSWORD_AUTH_REGEX + "))?@)?(?<Host>" + HOST_REGEX + ")(:(?<Port>" + PORT_REGEX + "))?(?<Oid>" + PATH_REGEX + ")";
     public static String MIN_REGEX = DIGIT_REGEX + "{1,8}";
     public static String MAX_REGEX = DIGIT_REGEX + "{1,8}";
     public static String FREQUENCY_REGEX = DIGIT_REGEX + "{1,8}";
-    public static String AUGMENTED_URL_REGEX ="(?<Id>"+ ID_REGEX + ")!(?<Url>"+ URL_REGEX + ")!(?<Min>"+ MIN_REGEX + ")!(?<Max>"+ MAX_REGEX+ ")";
+    public static String AUGMENTED_URL_REGEX = "(?<Id>" + ID_REGEX + ")!(?<Url>" + URL_REGEX + ")!(?<Min>" + MIN_REGEX + ")!(?<Max>" + MAX_REGEX + ")";
     public static String STATE_REGEX = "OK|ALARM|DOWN|UNKNOWN";
     public static String MESSAGE_REGEX = CHARACTER_REGEX + "{1,200}";
 
@@ -48,15 +48,15 @@ public class Analyzer implements IAnalyzer {
     /*
     Definition between monitor and probe
      */
-    public static String SETUP_REGEX = "SETUP" + SP_REGEX +"(?<Frequency>" +FREQUENCY_REGEX +")(" + SP_REGEX +"(?<Aurls>" + AUGMENTED_URL_REGEX + ")){0,100}" + CRLF_REGEX;
+    public static String SETUP_REGEX = "SETUP" + SP_REGEX + "(?<Frequency>" + FREQUENCY_REGEX + ")(" + SP_REGEX + "(?<Aurls>" + AUGMENTED_URL_REGEX + ")){0,100}" + CRLF_REGEX;
     public static String STATUSOF_REGEX = "STATUSOF" + SP_REGEX + "(?<Id>" + ID_REGEX + ")" + CRLF_REGEX;
-    public static String STATUS_REGEX = "STATUS" + SP_REGEX + "(?<Id>"+ ID_REGEX + ")" + SP_REGEX + "(?<State>" + STATE_REGEX + ")"+ CRLF_REGEX;
+    public static String STATUS_REGEX = "STATUS" + SP_REGEX + "(?<Id>" + ID_REGEX + ")" + SP_REGEX + "(?<State>" + STATE_REGEX + ")" + CRLF_REGEX;
 
     /*
     Multicast
      */
-    public static String PROBE_REGEX = "PROBE" + SP_REGEX + PROTOCOL_REGEX + SP_REGEX + PORT_REGEX + CRLF_REGEX;
-    public static String DATA_REGEX = "DATA" + SP_REGEX + PROTOCOL_REGEX + SP_REGEX + PORT_REGEX + CRLF_REGEX;
+    public static String PROBE_REGEX = "PROBE" + SP_REGEX + "(?<Protocol>" + PROTOCOL_REGEX + ")" + SP_REGEX + "(?<Port>" + PORT_REGEX + ")" + CRLF_REGEX;
+    public static String DATA_REGEX = "DATA" + SP_REGEX + "(?<Protocol>" + PROTOCOL_REGEX + ")" + SP_REGEX + "(?<Port>" + PORT_REGEX + ")" + CRLF_REGEX;
 
     private final List<String> regexList = List.of(
             NEWMON_REGEX, NEWMON_RESP_REGEX, LISTMON_REGEX, LISTMON_REGEX, MON_REGEX, REQUEST_REGEX, RESPOND_REGEX, SETUP_REGEX, STATUSOF_REGEX, STATUS_REGEX, PROBE_REGEX, DATA_REGEX
@@ -87,5 +87,4 @@ public class Analyzer implements IAnalyzer {
         int pos = analyze(toAnalyze);
         return regexList.get(pos);
     }
-
 }
