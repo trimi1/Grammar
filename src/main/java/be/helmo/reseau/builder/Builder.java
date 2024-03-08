@@ -81,11 +81,11 @@ public class Builder {
     From probe to monitor
      */
     public static String buildProbe(String protocol, int port) {
-        return replacePlaceholder(replacePlaceholder(PROBE, "protocol ", protocol), "port", String.valueOf(port));
+        return replacePlaceholder(replacePlaceholder(PROBE, "protocol", protocol), "port", String.valueOf(port));
     }
 
     public static String buildData(String protocol, int port) {
-        return replacePlaceholder(replacePlaceholder(DATA, "protocol ", protocol), "port", String.valueOf(port));
+        return replacePlaceholder(replacePlaceholder(DATA, "protocol", protocol), "port", String.valueOf(port));
     }
 
     public static String buildStatus(String id, String state) {
