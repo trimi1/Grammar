@@ -6,7 +6,7 @@ public class Builder {
     /*
     For monitor to probe
      */
-    public final static String SETUP = "SETUP <frequency>\n\n";
+    public final static String SETUP = "SETUP <frequency>";
     public final static String STATUSOF = "STATUSOF <id>\n\n";
 
     /*
@@ -14,7 +14,7 @@ public class Builder {
      */
     public final static String PROBE = "PROBE <protocol> <port>\n\n";
     public final static String DATA = "DATA <protocol> <port>\n\n";
-    public final static String STATUS = "STATUS <id> <state>\n\n";
+    public final static String STATUS = "STATUS <id> <state>\r\n";
 
     /*
     For Client to Monitor
@@ -66,7 +66,9 @@ public class Builder {
     public static String buildSetup(int frequency, List<String> augmentedUrl) {
         StringBuilder s = new StringBuilder(replacePlaceholder(SETUP, "frequency", String.valueOf(frequency)));
         for (String a : augmentedUrl) {
-            s.append(" ").append(a);
+            if (!a.isEmpty()) {
+                s.append(" ").append(a);
+            }
         }
         return s.toString();
     }
