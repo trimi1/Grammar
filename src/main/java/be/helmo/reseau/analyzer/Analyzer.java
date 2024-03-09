@@ -3,6 +3,9 @@ package be.helmo.reseau.analyzer;
 import be.helmo.reseau.interfaces.IAnalyzer;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Analyzer implements IAnalyzer {
     private static Analyzer instance;
@@ -22,14 +25,14 @@ public class Analyzer implements IAnalyzer {
     private static final String PASSWORD_REGEX = CHARACTER_PASS_REGEX + "{3,50}";
     private static final String AUTHENTICATION_REGEX = CHARACTER_PASS_REGEX + "{3,50}";
     private static final String PASSWORD_AUTH_REGEX = "(?<Password>" + PASSWORD_REGEX + ")(#(?<Auth>" + AUTHENTICATION_REGEX + "))?";
-    private static final String HOST_REGEX = "(" + LETTER_DIGIT_REGEX + "|\\.|_|-)" + "{3,50}";
-    private static final String PATH_REGEX = "/(" + LETTER_DIGIT_REGEX + "|[.\\-_])" + "{0,100}";
-    private static final String URL_REGEX = "(?<Protocol>" + PROTOCOL_REGEX + ")://((?<Username>" + USERNAME_REGEX + ")(:("
-            + PASSWORD_AUTH_REGEX + "))?@)?(?<Host>" + HOST_REGEX + ")(:(?<Port>" + PORT_REGEX + "))?(?<Oid>" + PATH_REGEX + ")";
+    private static final String HOST_REGEX = "(?<Host>(" + LETTER_DIGIT_REGEX + "|\\.|_|-)" + "{3,50})";
+    private static final String PATH_REGEX = "/(?<Oid>(" + LETTER_DIGIT_REGEX + "|[.\\-_])" + "{0,100})";
+    public static final String URL_REGEX = "(?<Protocol>" + PROTOCOL_REGEX + ")://((?<Username>" + USERNAME_REGEX + ")(:("
+            + PASSWORD_AUTH_REGEX + "))?@)?" + HOST_REGEX + "(:(?<Port>" + PORT_REGEX + "))?" + PATH_REGEX;
     private static final String MIN_REGEX = DIGIT_REGEX + "{1,8}";
     private static final String MAX_REGEX = DIGIT_REGEX + "{1,8}";
     private static final String FREQUENCY_REGEX = DIGIT_REGEX + "{1,8}";
-    public static final String AUGMENTED_URL_REGEX = "(?<Id>" + ID_REGEX + ")!(?<Url>" + URL_REGEX + ")!(?<Min>" + MIN_REGEX + ")!(?<Max>" + MAX_REGEX + ")";
+    public static final String AUGMENTED_URL_REGEX = "((?<Id>" + ID_REGEX + ")!(?<Url>" + URL_REGEX + ")!(?<Min>" + MIN_REGEX + ")!(?<Max>" + MAX_REGEX + "))";
     private static final String STATE_REGEX = "OK|ALARM|DOWN|UNKNOWN";
     private static final String MESSAGE_REGEX = CHARACTER_REGEX + "{1,200}";
     public static String NEWMON_REGEX = "NEWMON" + SP_REGEX + "(?<Aurl>" + AUGMENTED_URL_REGEX + ")" + CRLF_REGEX;
@@ -38,8 +41,8 @@ public class Analyzer implements IAnalyzer {
     public static String MON_REGEX = "MON" + "((" + SP_REGEX + ID_REGEX + "){0,100})" + CRLF_REGEX;
     public static String REQUEST_REGEX = "REQUEST" + SP_REGEX + ID_REGEX + CRLF_REGEX;
     public static String RESPOND_REGEX = "RESPOND" + SP_REGEX + ID_REGEX + SP_REGEX + URL_REGEX + SP_REGEX + STATE_REGEX + CRLF_REGEX;
-    public static final String SETUP_REGEX = "SETUP" + SP_REGEX + "(?<Frequency>" + FREQUENCY_REGEX + ")((?:" + SP_REGEX + "(?<Aurl>" + AUGMENTED_URL_REGEX + "))*)" + CRLF_REGEX;
-    public static String STATUSOF_REGEX = "STATUSOF" + SP_REGEX + "(?<Id>" + ID_REGEX + ")" + CRLF_REGEX;
+    public static String SETUP_REGEX = "SETUP" + SP_REGEX + "(?<Frequency>" + FREQUENCY_REGEX + ")(?<Aurls>(" + SP_REGEX + AUGMENTED_URL_REGEX + "){0,100})";
+    public static String STATUSOF_REGEX = "STATUSOF" + SP_REGEX + "(?<Id>" + ID_REGEX + ")";
     public static String STATUS_REGEX = "STATUS" + SP_REGEX + "(?<Id>" + ID_REGEX + ")" + SP_REGEX + "(?<State>" + STATE_REGEX + ")" + CRLF_REGEX;
     public static String PROBE_REGEX = "PROBE" + SP_REGEX + "(?<Protocol>" + PROTOCOL_REGEX + ")" + SP_REGEX + "(?<Port>" + PORT_REGEX + ")" + CRLF_REGEX;
     public static String DATA_REGEX = "DATA" + SP_REGEX + "(?<Protocol>" + PROTOCOL_REGEX + ")" + SP_REGEX + "(?<Port>" + PORT_REGEX + ")" + CRLF_REGEX;
@@ -59,18 +62,15 @@ public class Analyzer implements IAnalyzer {
         return instance;
     }
 
-    public int analyze(String toAnalyze) {
-        for (String r : regexList) {
-            if (r.matches(toAnalyze)) {
-                return regexList.indexOf(r);
+    public Optional<String> getRegex(String toAnalyze) {
+        for (String regex : this.regexList) {
+            Pattern pattern = Pattern.compile(regex);
+            Matcher matcher = pattern.matcher(toAnalyze);
+
+            if (matcher.matches()) {
+                return Optional.of(regex);
             }
         }
-
-        return -1;
-    }
-
-    public String giveMessageConstruction(String toAnalyze) {
-        int pos = analyze(toAnalyze);
-        return regexList.get(pos);
+        return Optional.empty();
     }
 }

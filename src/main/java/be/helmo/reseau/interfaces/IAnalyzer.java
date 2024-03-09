@@ -1,6 +1,7 @@
 package be.helmo.reseau.interfaces;
 
+import java.util.Optional;
+
 public interface IAnalyzer {
-    int analyze(String toAnalyze);
-    String giveMessageConstruction(String message);
+    Optional<String> getRegex(String toAnalyze);
 }
