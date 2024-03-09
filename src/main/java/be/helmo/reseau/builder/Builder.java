@@ -29,7 +29,7 @@ public class Builder {
      */
     public final static String NEWMON_RESPOK = "+OK <message>\n\n";
     public final static String NEWMON_RESPERR = "-ERR <message>\n\n";
-    public final static String MON = "MON <id>\n\n";
+    public final static String MON = "MON\n\n";
     public final static String RESPOND = "RESPOND <id> <url> <state>\n\n";
 
     /*
@@ -52,8 +52,12 @@ public class Builder {
         return replacePlaceholder(NEWMON_RESPERR, "message", message);
     }
 
-    public static String buildMon(String id) {
-        return replacePlaceholder(MON, "id", id);
+    public static String buildMon(List<String> ids) {
+        StringBuilder s = new StringBuilder(MON);
+        for (String id : ids) {
+            s.append(" ").append(id);
+        }
+        return s.toString();
     }
 
     public static String buildRespond(String id, String url, String state) {
