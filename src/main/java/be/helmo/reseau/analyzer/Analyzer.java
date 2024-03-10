@@ -34,17 +34,17 @@ public class Analyzer implements IAnalyzer {
     private static final String MIN_REGEX = DIGIT_REGEX + "{1,8}";
     private static final String MAX_REGEX = DIGIT_REGEX + "{1,8}";
     private static final String FREQUENCY_REGEX = DIGIT_REGEX + "{1,8}";
-    public static final String AUGMENTED_URL_REGEX = "((?<Id>" + ID_REGEX + ")!(?<Url>" + URL_REGEX + ")!(?<Min>" + MIN_REGEX + ")!(?<Max>" + MAX_REGEX + "))";
     private static final String STATE_REGEX = "OK|ALARM|DOWN|UNKNOWN";
     private static final String MESSAGE_REGEX = CHARACTER_REGEX + "{1,200}";
+    public static final String AUGMENTED_URL_REGEX = "((?<Id>" + ID_REGEX + ")!(?<Url>" + URL_REGEX + ")!(?<Min>" + MIN_REGEX + ")!(?<Max>" + MAX_REGEX + "))";
     public static String NEWMON_REGEX = "NEWMON" + SP_REGEX + "(?<Aurl>" + AUGMENTED_URL_REGEX + ")" + CRLF_REGEX;
-    public static String NEWMON_RESP_REGEX = "(\\+OK" + SP_REGEX + MESSAGE_REGEX + ")?|(-ERR" + SP_REGEX + MESSAGE_REGEX + ")?";
+    public static String NEWMON_RESP_REGEX = "(\\+OK" + SP_REGEX + MESSAGE_REGEX + ")?|(-ERR" + SP_REGEX + MESSAGE_REGEX + ")?" + CRLF_REGEX;
     public static String LISTMON_REGEX = "LISTMON" + CRLF_REGEX;
     public static String MON_REGEX = "MON" + "((" + SP_REGEX + ID_REGEX + "){0,100})" + CRLF_REGEX;
     public static String REQUEST_REGEX = "REQUEST" + SP_REGEX + ID_REGEX + CRLF_REGEX;
     public static String RESPOND_REGEX = "RESPOND" + SP_REGEX + ID_REGEX + SP_REGEX + URL_REGEX + SP_REGEX + STATE_REGEX + CRLF_REGEX;
-    public static String SETUP_REGEX = "SETUP" + SP_REGEX + "(?<Frequency>" + FREQUENCY_REGEX + ")(?<Aurls>(" + SP_REGEX + AUGMENTED_URL_REGEX + "){0,100})";
-    public static String STATUSOF_REGEX = "STATUSOF" + SP_REGEX + "(?<Id>" + ID_REGEX + ")";
+    public static String SETUP_REGEX = "SETUP" + SP_REGEX + "(?<Frequency>" + FREQUENCY_REGEX + ")(?<Aurls>(" + SP_REGEX + AUGMENTED_URL_REGEX + "){0,100})"  + CRLF_REGEX;
+    public static String STATUSOF_REGEX = "STATUSOF" + SP_REGEX + "(?<Id>" + ID_REGEX + ")" + CRLF_REGEX;
     public static String STATUS_REGEX = "STATUS" + SP_REGEX + "(?<Id>" + ID_REGEX + ")" + SP_REGEX + "(?<State>" + STATE_REGEX + ")" + CRLF_REGEX;
     public static String PROBE_REGEX = "PROBE" + SP_REGEX + "(?<Protocol>" + PROTOCOL_REGEX + ")" + SP_REGEX + "(?<Port>" + PORT_REGEX + ")" + CRLF_REGEX;
     public static String DATA_REGEX = "DATA" + SP_REGEX + "(?<Protocol>" + PROTOCOL_REGEX + ")" + SP_REGEX + "(?<Port>" + PORT_REGEX + ")" + CRLF_REGEX;
@@ -76,19 +76,21 @@ public class Analyzer implements IAnalyzer {
         return Optional.empty();
     }
 
-    public Map<String, String> getGroups(String regex, String receivedMessage) {
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(receivedMessage);
-
+    public Map<String, String> getGroups(String receivedMessage) {
         Map<String, String> groups = new HashMap<>();
-        if (matcher.find()) {
-            for (int i = 1; i <= matcher.groupCount(); i++) {
-                String groupName = matcher.group(i);
-                String groupValue = matcher.group(groupName);
-                groups.put(groupName, groupValue);
+        for (String regex : this.regexList) {
+            Pattern pattern = Pattern.compile(regex);
+            Matcher matcher = pattern.matcher(receivedMessage);
+
+            if (matcher.find()) {
+                for (int i = 1; i <= matcher.groupCount(); i++) {
+                    String groupName = matcher.group(i);
+                    String groupValue = matcher.group(groupName);
+                    groups.put(groupName, groupValue);
+                }
+                break;
             }
         }
-
         return groups;
     }
 }

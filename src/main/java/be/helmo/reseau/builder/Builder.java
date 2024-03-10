@@ -6,31 +6,30 @@ public class Builder {
     /*
     For monitor to probe
      */
-    public final static String SETUP = "SETUP <frequency>";
-    public final static String STATUSOF = "STATUSOF <id>\n\n";
+    private final static String SETUP = "SETUP <frequency>";
+    public final static String STATUSOF = "STATUSOF <id>\r\n";
 
     /*
     For probe to monitor
      */
-    public final static String PROBE = "PROBE <protocol> <port>\n\n";
-    public final static String DATA = "DATA <protocol> <port>\n\n";
-    public final static String STATUS = "STATUS <id> <state>\r\n";
+    private final static String PROBE = "PROBE <protocol> <port>\r\n";
+    private final static String DATA = "DATA <protocol> <port>\r\n";
+    private final static String STATUS = "STATUS <id> <state>\r\n";
 
     /*
     For Client to Monitor
      */
-    public final static String NEWMON = "NEWMON <augmented_url>\n\n";
-
-    public final static String LISTMON = "LISTMON\n\n";
-    public final static String REQUEST = "REQUEST <id>\n\n";
+    private final static String NEWMON = "NEWMON <augmented_url>\r\n";
+    private final static String LISTMON = "LISTMON\r\n";
+    private final static String REQUEST = "REQUEST <id>\r\n";
 
     /*
     For Monitor to Client
      */
-    public final static String NEWMON_RESPOK = "+OK <message>\n\n";
-    public final static String NEWMON_RESPERR = "-ERR <message>\n\n";
-    public final static String MON = "MON\n\n";
-    public final static String RESPOND = "RESPOND <id> <url> <state>\n\n";
+    private final static String NEWMON_RESPOK = "+OK <message>\r\n";
+    private final static String NEWMON_RESPERR = "-ERR <message>\r\n";
+    private final static String MON = "MON";
+    private final static String RESPOND = "RESPOND <id> <url> <state>\r\n";
 
     /*
   Utils
@@ -57,6 +56,7 @@ public class Builder {
         for (String id : ids) {
             s.append(" ").append(id);
         }
+        s.append("\r\n");
         return s.toString();
     }
 
@@ -74,6 +74,7 @@ public class Builder {
                 s.append(" ").append(a);
             }
         }
+        s.append("\r\n");
         return s.toString();
     }
 
