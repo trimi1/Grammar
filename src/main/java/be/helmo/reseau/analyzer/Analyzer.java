@@ -2,7 +2,9 @@ package be.helmo.reseau.analyzer;
 
 import be.helmo.reseau.interfaces.IAnalyzer;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -72,5 +74,21 @@ public class Analyzer implements IAnalyzer {
             }
         }
         return Optional.empty();
+    }
+
+    public Map<String, String> getGroups(String regex, String receivedMessage) {
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(receivedMessage);
+
+        Map<String, String> groups = new HashMap<>();
+        if (matcher.find()) {
+            for (int i = 1; i <= matcher.groupCount(); i++) {
+                String groupName = matcher.group(i);
+                String groupValue = matcher.group(groupName);
+                groups.put(groupName, groupValue);
+            }
+        }
+
+        return groups;
     }
 }
