@@ -82,8 +82,9 @@ public class Analyzer implements IAnalyzer {
             Pattern pattern = Pattern.compile(regex);
             Matcher matcher = pattern.matcher(receivedMessage);
 
-            if (matcher.find()) {
+            if (matcher.matches()) {
                 for (String groupName : pattern.namedGroups().keySet()) {
+                    System.out.println(groupName);
                     String groupValue = matcher.group(groupName);
                     groups.put(groupName, groupValue);
                 }
