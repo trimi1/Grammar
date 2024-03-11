@@ -50,7 +50,7 @@ public class Analyzer implements IAnalyzer {
     public static final String DATA_REGEX = "(?<Type>DATA)" + SP_REGEX + "(?<Protocol>" + PROTOCOL_REGEX + ")" + SP_REGEX + "(?<Port>" + PORT_REGEX + ")" + CRLF_REGEX;
 
     private final List<String> regexList = List.of(
-            URL_REGEX,NEWMON_REGEX, NEWMON_RESP_REGEX, LISTMON_REGEX, MON_REGEX, REQUEST_REGEX, RESPOND_REGEX, SETUP_REGEX, STATUSOF_REGEX, STATUS_REGEX, PROBE_REGEX, DATA_REGEX, AUGMENTED_URL_REGEX
+            URL_REGEX, NEWMON_REGEX, NEWMON_RESP_REGEX, LISTMON_REGEX, MON_REGEX, REQUEST_REGEX, RESPOND_REGEX, SETUP_REGEX, STATUSOF_REGEX, STATUS_REGEX, PROBE_REGEX, DATA_REGEX, AUGMENTED_URL_REGEX
     );
 
     private Analyzer() {
@@ -83,8 +83,7 @@ public class Analyzer implements IAnalyzer {
             Matcher matcher = pattern.matcher(receivedMessage);
 
             if (matcher.find()) {
-                for (int i = 1; i <= matcher.groupCount(); i++) {
-                    String groupName = matcher.group(i);
+                for (String groupName : pattern.namedGroups().keySet()) {
                     String groupValue = matcher.group(groupName);
                     groups.put(groupName, groupValue);
                 }
