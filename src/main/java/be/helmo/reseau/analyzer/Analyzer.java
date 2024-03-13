@@ -39,12 +39,12 @@ public class Analyzer implements IAnalyzer {
     public static final String AUGMENTED_URL_REGEX = "((?<Id>" + ID_REGEX + ")!(?<Url>" + URL_REGEX + ")!(?<Min>" + MIN_REGEX + ")!(?<Max>" + MAX_REGEX + "))";
     public static final String NEWMON_REGEX = "(?<Type>NEWMON)" + SP_REGEX + "(?<Aurl>" + AUGMENTED_URL_REGEX + ")" + "(" + CRLF_REGEX + ")?";
     public static final String NEWMON_RESP_REGEX = "(\\+OK" + SP_REGEX + MESSAGE_REGEX + ")?|(-ERR" + SP_REGEX + MESSAGE_REGEX + ")?" + "(" + CRLF_REGEX + ")?";
-    public static final String LISTMON_REGEX = "(?<Type>LISTMON)" + CRLF_REGEX;
+    public static final String LISTMON_REGEX = "(?<Type>LISTMON)" + "(" + CRLF_REGEX + ")?";
     public static final String MON_REGEX = "(?<Type>MON)" + "((" + SP_REGEX + ID_REGEX + "){0,100})" + "(" + CRLF_REGEX + ")?";
     public static final String REQUEST_REGEX = "(?<Type>REQUEST)" + SP_REGEX + "(?<Id>" + ID_REGEX + ")"+ "(" + CRLF_REGEX + ")?";
     public static final String RESPOND_REGEX = "(?<Type>RESPOND)" + SP_REGEX + ID_REGEX + SP_REGEX + URL_REGEX + SP_REGEX + STATE_REGEX + "(" + CRLF_REGEX + ")?";
     public static final String SETUP_REGEX = "(?<Type>SETUP)" + SP_REGEX + "(?<Frequency>" + FREQUENCY_REGEX + ")(?<Aurls>(" + SP_REGEX + AUGMENTED_URL_REGEX + "){0,100})" + "(" + CRLF_REGEX + ")?";
-    public static final String STATUSOF_REGEX = "(?<Type>STATUSOF)" + SP_REGEX + "(?<Id>" + ID_REGEX + ")" + CRLF_REGEX;
+    public static final String STATUSOF_REGEX = "(?<Type>STATUSOF)" + SP_REGEX + "(?<Id>" + ID_REGEX + ")" + "(" + CRLF_REGEX + ")?";
     public static final String STATUS_REGEX = "(?<Type>STATUS)" + SP_REGEX + "(?<Id>" + ID_REGEX + ")" + SP_REGEX + "(?<State>" + STATE_REGEX + ")" + "(" + CRLF_REGEX + ")?";
     public static final String PROBE_REGEX = "(?<Type>PROBE)" + SP_REGEX + "(?<Protocol>" + PROTOCOL_REGEX + ")" + SP_REGEX + "(?<Port>" + PORT_REGEX + ")" + "(" + CRLF_REGEX + ")?";
     public static final String DATA_REGEX = "(?<Type>DATA)" + SP_REGEX + "(?<Protocol>" + PROTOCOL_REGEX + ")" + SP_REGEX + "(?<Port>" + PORT_REGEX + ")" + "(" + CRLF_REGEX + ")?";
