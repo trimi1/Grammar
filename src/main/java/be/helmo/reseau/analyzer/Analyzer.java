@@ -15,6 +15,7 @@ public class Analyzer implements IAnalyzer {
     private static final String LETTER_REGEX = "[A-Za-z]";
     private static final String DIGIT_REGEX = "[0-9]";
     private static final String LETTER_DIGIT_REGEX = "(" + LETTER_REGEX + "|" + DIGIT_REGEX + ")";
+    private static final String LETTER_DIGIT_REGEX_POINT = "(" + LETTER_REGEX + "|" + DIGIT_REGEX + "|\\." + ")";
     private static final String CRLF_REGEX = "\r\n";
     private static final String PORT_REGEX = DIGIT_REGEX + "{1,5}";
     private static final String CHARACTER_REGEX = "[\\x20-\\xFF]";
@@ -23,11 +24,11 @@ public class Analyzer implements IAnalyzer {
     private static final String SP_REGEX = "\\x20";
     private static final String ID_REGEX = LETTER_DIGIT_REGEX + "{5,10}";
     private static final String PROTOCOL_REGEX = LETTER_DIGIT_REGEX + "{3,15}";
-    private static final String USERNAME_REGEX = LETTER_DIGIT_REGEX + "{3,50}";
+    private static final String USERNAME_REGEX = LETTER_DIGIT_REGEX_POINT + "{3,50}";
     private static final String PASSWORD_REGEX = CHARACTER_PASS_REGEX + "{3,50}";
     private static final String AUTHENTICATION_REGEX = CHARACTER_PASS_REGEX + "{3,50}";
     private static final String PASSWORD_AUTH_REGEX = "(?<Password>" + PASSWORD_REGEX + ")(#(?<Auth>" + AUTHENTICATION_REGEX + "))?";
-    private static final String HOST_REGEX = "(?<Host>(" + LETTER_DIGIT_REGEX + "|\\.|_|-)" + "{3,50})";
+    private static final String HOST_REGEX = "(?<Host>(" + LETTER_DIGIT_REGEX + "|\\.|_|-|@)" + "{3,50})";
     private static final String PATH_REGEX = "/(?<Oid>(" + LETTER_DIGIT_REGEX + "|[.\\-_])" + "{0,100})";
     public static final String URL_REGEX = "(?<Protocol>" + PROTOCOL_REGEX + ")://((?<Username>" + USERNAME_REGEX + ")(:("
             + PASSWORD_AUTH_REGEX + "))?@)?" + HOST_REGEX + "(:(?<Port>" + PORT_REGEX + "))?" + PATH_REGEX;
